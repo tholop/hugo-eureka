@@ -79,8 +79,16 @@
   <script defer src="{{ printf $assets.highlightjs.languages.url $assets.highlightjs.version . }}"
     {{ with $assets.highlightjs.languages.sri }} integrity="{{ . }}" {{ end }} crossorigin></script>
 {{ end }} -->
-<script defer src="{{ printf $assets.fontawesome.js.url $assets.fontawesome.version }}"
-  {{ with $assets.fontawesome.js.sri }} integrity="{{ . }}" {{ end }} crossorigin></script>
+
+
+<!-- {{- $eurekaJS := resources.Get "js/fontawesome/all.min.js" | resources.ExecuteAsTemplate "js/eureka.js" . | minify }} -->
+{{- $fontawesomeJS := resources.Get "js/fontawesome/all.min.js"}}
+<script defer src="{{ $fontawesomeJS.Permalink }}"></script>
+
+<!-- {{ with resources.Get "css/fontawesome/all.min.css" | minify }} <style>{{ .Content | safeCSS }}</style> {{ end }} -->
+
+<!-- <script defer src="{{ printf $assets.fontawesome.js.url $assets.fontawesome.version }}"
+  {{ with $assets.fontawesome.js.sri }} integrity="{{ . }}" {{ end }} crossorigin></script> -->
 
 {{- $enableMath := false }}
 {{- if .Site.Params.math.handler }}
