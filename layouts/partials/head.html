@@ -66,7 +66,7 @@
   href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
   as="style" onload="this.onload=null;this.rel='stylesheet'"> -->
 
-{{ with resources.Get "css/custom.css" | minify }} <style>{{ .Content | safeCSS }}</style> {{ end }}
+{{ with resources.Get "css/fonts.css" | resources.ExecuteAsTemplate "css/fonts.css" . | minify }} <style>{{ .Content | safeCSS }}</style> {{ end }}
 
 {{- $assets := .Site.Data.assets }}
 <!-- {{ $highlightjsStyle := .Site.Params.highlight.highlightjs.style | default "solarized-light" }}
@@ -84,8 +84,6 @@
 <!-- {{- $eurekaJS := resources.Get "js/fontawesome/all.min.js" | resources.ExecuteAsTemplate "js/eureka.js" . | minify }} -->
 {{- $fontawesomeJS := resources.Get "js/fontawesome/all.min.js"}}
 <script defer src="{{ $fontawesomeJS.Permalink }}"></script>
-
-<!-- {{ with resources.Get "css/fontawesome/all.min.css" | minify }} <style>{{ .Content | safeCSS }}</style> {{ end }} -->
 
 <!-- <script defer src="{{ printf $assets.fontawesome.js.url $assets.fontawesome.version }}"
   {{ with $assets.fontawesome.js.sri }} integrity="{{ . }}" {{ end }} crossorigin></script> -->
