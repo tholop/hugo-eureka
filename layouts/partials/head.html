@@ -61,13 +61,15 @@
 {{- $eurekaJS := resources.Get "js/eureka.js" | resources.ExecuteAsTemplate "js/eureka.js" . | minify }}
 <script defer src="{{ $eurekaJS.Permalink }}"></script>
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload"
   href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
-  as="style" onload="this.onload=null;this.rel='stylesheet'">
+  as="style" onload="this.onload=null;this.rel='stylesheet'"> -->
+
+{{ with resources.Get "css/custom.css" | minify }} <style>{{ .Content | safeCSS }}</style> {{ end }}
 
 {{- $assets := .Site.Data.assets }}
-{{ $highlightjsStyle := .Site.Params.highlight.highlightjs.style | default "solarized-light" }}
+<!-- {{ $highlightjsStyle := .Site.Params.highlight.highlightjs.style | default "solarized-light" }}
 <link rel="stylesheet" href="{{ printf $assets.highlightjs.css.url $assets.highlightjs.version $highlightjsStyle }}"
   {{ with $assets.highlightjs.css.sri }} integrity="{{ . }}" {{ end }} media="print"
   onload="this.media='all';this.onload=null" crossorigin>
@@ -76,7 +78,7 @@
 {{ range .Site.Params.highlight.highlightjs.languages }}
   <script defer src="{{ printf $assets.highlightjs.languages.url $assets.highlightjs.version . }}"
     {{ with $assets.highlightjs.languages.sri }} integrity="{{ . }}" {{ end }} crossorigin></script>
-{{ end }}
+{{ end }} -->
 <script defer src="{{ printf $assets.fontawesome.js.url $assets.fontawesome.version }}"
   {{ with $assets.fontawesome.js.sri }} integrity="{{ . }}" {{ end }} crossorigin></script>
 
