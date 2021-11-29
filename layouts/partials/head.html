@@ -81,9 +81,18 @@
 {{ end }} -->
 
 
-<!-- {{- $eurekaJS := resources.Get "js/fontawesome/all.min.js" | resources.ExecuteAsTemplate "js/eureka.js" . | minify }} -->
-{{- $fontawesomeJS := resources.Get "js/fontawesome/all.min.js"}}
-<script defer src="{{ $fontawesomeJS.Permalink }}"></script>
+
+
+{{/* 
+    <!-- {{- $fontawesomeJS := resources.Get "js/fontawesome/all.min.js"}}
+        <script defer src="{{ $fontawesomeJS.Permalink }}"></script> -->
+<!-- {{ $fontawesomeJS := resources.Get "js/font-awesome-min.js" | js.Build "fa.min.js"}} -->
+<!-- {{ $fontawesomeJS := resources.Get "js/fontawesome/less.min.js" | js.Build "js/fa.js" | minify }} -->
+*/}}
+
+{{ $fontawesomeJS := resources.Get "js/fontawesome/all_pruned.js" | js.Build "js/fa.js" | minify }}
+<script defer type="text/javascript" src="{{ $fontawesomeJS.RelPermalink }}"></script>
+
 
 <!-- <script defer src="{{ printf $assets.fontawesome.js.url $assets.fontawesome.version }}"
   {{ with $assets.fontawesome.js.sri }} integrity="{{ . }}" {{ end }} crossorigin></script> -->
